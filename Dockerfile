@@ -1,6 +1,9 @@
 # Use official Nginx image
 FROM nginx:alpine
 
+# Config para una vuelta del text
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Remove the default website
 RUN rm -rf /usr/share/nginx/html/*
 
