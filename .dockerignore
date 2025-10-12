@@ -1,0 +1,63 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker files (not needed in web root)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+*.md
+
+# Logs (will be mounted separately)
+logs/
+*.log
+npm-debug.log*
+
+# Development and CI files
+.env*
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+Jenkinsfile
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Backup files
+*.backup
+*.bak
+*.orig
+
+# Build artifacts
+dist/
+build/
+out/
+node_modules/
