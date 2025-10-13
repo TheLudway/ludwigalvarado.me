@@ -212,8 +212,6 @@ pre {
 }
 
 
-
-
 .stackpreview:hover {
   border-color: #1e40af;
 }
@@ -264,6 +262,88 @@ h2 {
   color: #6b7280;
   line-height: 1.5;
 }
+
+.image-rotator {
+  position: relative;
+  float: right;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+}
+
+.image-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity 1s ease, filter 1s ease;
+}
+
+.image-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-slide span {
+  position: absolute;
+  bottom: 6px;
+  right: 8px;
+  font-size: 0.7rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 6px;
+}
+
+/* Animation for the slides */
+@keyframes fadeRotate {
+  0%, 15% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  20%, 100% {
+    opacity: 0;
+    filter: blur(6px);
+  }
+}
+
+/* Apply animations dynamically for each slide */
+.image-slide {
+  animation: fadeRotate 16s infinite;
+}
+
+.image-slide {
+  pointer-events: none;
+}
+
+.image-slide {
+  animation: fadeRotate 16s infinite;
+}
+
+.image-slide:nth-child(1) { animation-delay: 0s; }
+.image-slide:nth-child(2) { animation-delay: 4s; }
+.image-slide:nth-child(3) { animation-delay: 8s; }
+.image-slide:nth-child(4) { animation-delay: 12s; }
+
+/* Pointer events only on visible slides */
+@keyframes fadeRotate {
+  0%, 15% {
+    opacity: 1;
+    filter: blur(0);
+    pointer-events: auto;
+  }
+  20%, 100% {
+    opacity: 0;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+}
+
+
+
 
 .float {
   float: right;
