@@ -170,7 +170,7 @@ pre {
 .stackpreview {
   display: inline-block;
   width: 300px;
-  height: 400px;
+  height: 410px;
   margin: 3ex 1em;
   padding: 0;
   clear: both;
@@ -276,7 +276,7 @@ h2 {
   opacity: 0;
   filter: blur(6px);
   pointer-events: none;
-  animation: fadeRotate 16s infinite;
+  animation: fadeRotate 20s infinite;
 }
 
 .image-slide img {
@@ -329,6 +329,7 @@ h2 {
 .image-slide:nth-child(2) { animation-delay: 4s; }
 .image-slide:nth-child(3) { animation-delay: 8s; }
 .image-slide:nth-child(4) { animation-delay: 12s; }
+.image-slide:nth-child(5) { animation-delay: 16s; }
 
 
 
