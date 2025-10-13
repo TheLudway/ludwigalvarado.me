@@ -71,22 +71,18 @@ a:active {
   padding: 0.5rem 1rem;
   background: white;
   color: #374151;
-  /* border-radius: 25px; */
   border: 1px solid #d1d5db;
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
-  /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); */
 }
 
 .info-tag:hover {
   background-color: #1e40af;
   color: white;
   border-color: #1e40af;
-  /* transform: translateY(-1px); */
-  /* box-shadow: 0 4px 8px rgba(30, 64, 175, 0.2); */
 }
 
 .info-tag.university {
@@ -279,7 +275,8 @@ h2 {
   height: 100%;
   opacity: 0;
   filter: blur(6px);
-  transition: opacity 1s ease, filter 1s ease;
+  pointer-events: none;
+  animation: fadeRotate 16s infinite;
 }
 
 .image-slide img {
@@ -298,49 +295,40 @@ h2 {
   padding: 2px 6px;
 }
 
-/* Animation for the slides */
+/* Animation keyframes for smooth rotation with blur effect */
 @keyframes fadeRotate {
-  0%, 15% {
-    opacity: 1;
-    filter: blur(0);
-  }
-  20%, 100% {
+  0% {
     opacity: 0;
     filter: blur(6px);
+    pointer-events: none;
   }
-}
-
-/* Apply animations dynamically for each slide */
-.image-slide {
-  animation: fadeRotate 16s infinite;
-}
-
-.image-slide {
-  pointer-events: none;
-}
-
-.image-slide {
-  animation: fadeRotate 16s infinite;
-}
-
-.image-slide:nth-child(1) { animation-delay: 0s; }
-.image-slide:nth-child(2) { animation-delay: 4s; }
-.image-slide:nth-child(3) { animation-delay: 8s; }
-.image-slide:nth-child(4) { animation-delay: 12s; }
-
-/* Pointer events only on visible slides */
-@keyframes fadeRotate {
-  0%, 15% {
+  5% {
     opacity: 1;
     filter: blur(0);
     pointer-events: auto;
   }
-  20%, 100% {
+  20% {
+    opacity: 1;
+    filter: blur(0);
+    pointer-events: auto;
+  }
+  25% {
+    opacity: 0;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+  100% {
     opacity: 0;
     filter: blur(6px);
     pointer-events: none;
   }
 }
+
+/* Animation delays for each slide */
+.image-slide:nth-child(1) { animation-delay: 0s; }
+.image-slide:nth-child(2) { animation-delay: 4s; }
+.image-slide:nth-child(3) { animation-delay: 8s; }
+.image-slide:nth-child(4) { animation-delay: 12s; }
 
 
 
