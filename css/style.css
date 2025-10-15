@@ -122,7 +122,9 @@ a:active {
 }
 
 .footer-bar {
-  text-align: right;
+  display: flex; /* allows left + right sections */
+  justify-content: space-between; /* pushes them apart */
+  align-items: center;
   font-size: 0.875rem;
   margin-top: 3rem;
   padding: 1rem 1.5rem;
@@ -132,6 +134,25 @@ a:active {
   font-family: 'Inter', sans-serif;
 }
 
+/* left side (badges or icons) */
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* spacing between badges */
+}
+
+/* optional if you use image badges */
+.footer-left img {
+  vertical-align: middle;
+  height: 32px; /* you can adjust this */
+}
+
+/* right side (your original text) */
+.footer-right {
+  text-align: right;
+}
+
+/* links keep your style */
 .footer-bar a {
   color: #1e40af;
   text-decoration: none;
@@ -142,6 +163,7 @@ a:active {
   color: #1e3a8a;
   text-decoration: underline;
 }
+
 
 /* Code and technical content styling */
 code, pre {
