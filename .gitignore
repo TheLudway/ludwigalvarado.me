@@ -5,3 +5,9 @@ tmp/
 
 
 logs/
+
+*.out
+*.out
+*.synctex.gz
+*.aux
+.auctex-auto/
