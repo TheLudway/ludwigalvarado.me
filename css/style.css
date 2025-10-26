@@ -486,7 +486,7 @@ h2 {
 /* Horizontal card layout */
 .card {
   display: flex;
-  align-items: flex-start;
+  align-items: center;/*flex-start; */
   gap: 1.5rem;
   background-color: white;
   border: 1px solid #e5e7eb;
@@ -546,6 +546,15 @@ h2 {
   text-decoration: underline;
 }
 
+.card-date {
+  font-size: 0.9rem;
+  color: #6b7280; /* Tailwind's gray-500 */
+  margin-top: -0.25rem;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .card {
@@ -571,3 +580,5 @@ h2 {
     font-size: 0.9rem;
   }
 }
+
+
