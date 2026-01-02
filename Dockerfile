@@ -31,8 +31,8 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
 HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
     CMD curl -f http://localhost/health || exit 1
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080
+EXPOSE 8080
 
 # Start nginx (no custom entrypoint needed)
 CMD ["nginx", "-g", "daemon off;"]
