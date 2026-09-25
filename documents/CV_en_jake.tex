@@ -1,0 +1,174 @@
+% ---------- Tagged PDF (optional) ----------
+% Uncomment the next line for a tagged PDF: real reading order and list
+% semantics for screen readers. Works with pdflatex on TeX Live 2023+.
+% The LaTeX tagging project still labels this experimental, so it is off
+% by default.
+% \DocumentMetadata{lang=en-US, testphase={phase-III}}
+
+\documentclass[a4paper,10pt]{article}
+
+% lmodern + T1: keeps text extraction intact when tagging (\DocumentMetadata) is enabled
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% -------------------- Packages --------------------
+\usepackage[a4paper,margin=0.6in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{etoolbox}
+
+% -------------------- Setup  --------------------
+\hypersetup{
+    pdftitle={Ludwig Alvarado Becerra - CV},
+    pdfauthor={Ludwig Alvarado Becerra},
+    pdfsubject={Curriculum Vitae},
+    pdfkeywords={Ingeniería de Software, Ciencia de Datos, Modelado Computacional, Linux, Python, C\#, CI/CD, Bash, Git},
+    pdfcreator={LaTeX with hyperref}
+}
+
+% -------------------- Formatting --------------------
+% Deliberately no font package — Computer Modern, the "tech standard" look.
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\linespread{1.05}
+\setlist[itemize]{itemsep=-2pt,topsep=2pt,leftmargin=0.18in}
+\sloppy
+\raggedbottom
+
+% Section formatting — small-caps title, full-width rule immediately under it,
+% tight spacing (Jake's Resume's signature look).
+\titleformat{\section}
+  {\large\scshape\raggedright}
+  {}{0em}{}[\titlerule]
+
+\titlespacing*{\section}{0pt}{7pt}{3pt}
+
+% -------------------- Semantic macros --------------------
+% render.py (app/services/conversion/render.py) only ever emits calls to the 11
+% macros below, with data already massaged (dates joined, "Present" resolved,
+% link labels derived, etc.) but with ALL visual decisions — bold/italic, hfill
+% alignment, icons, separators, list styling, gap sizes — owned here. See the
+% macro contract in that module's docstring before changing signatures.
+% Every template MUST define all 11, including \closebullets and \entrygap.
+
+\newtoggle{citemnotfirst}
+\newtoggle{bulletsopen}
+\newtoggle{skilllinenotfirst}
+
+% \closebullets closes the itemize list \rbullet opens. render.py calls it
+% right after emitting the \rbullet run for an entry. \AtEndDocument is a
+% defensive backstop only, in case a future call site forgets.
+\newcommand{\closebullets}{%
+  \iftoggle{bulletsopen}{\end{itemize}\togglefalse{bulletsopen}}{}%
+}
+\AtEndDocument{\closebullets}
+
+\newcommand{\resumeheader}[3]{%
+  \begin{center}
+  {\Huge \scshape #1}\\[3pt]
+  \ifblank{#2}{}{{\normalsize #2}\\[2pt]}%
+  \small
+  \togglefalse{citemnotfirst}%
+  #3
+  \end{center}
+  \vspace{-8pt}
+}
+
+% ATS-safe by design: icon-free — #1 (kind) never selects a glyph. It is only
+% checked once, for "email", so that case gets a real mailto: link instead of
+% a broken relative-URL href; every other kind renders identically, separated
+% by a plain " | " on one centered line.
+\newcommand{\citem}[3]{%
+  \iftoggle{citemnotfirst}{ $|$ }{\toggletrue{citemnotfirst}}%
+  \ifstrequal{#1}{email}{\href{mailto:#2}{#3}}{\ifblank{#2}{#3}{\href{#2}{#3}}}%
+}
+
+\newcommand{\sectionstart}[1]{\togglefalse{skilllinenotfirst}\section*{#1}}
+
+% Inverse of Classic: title leads (bold, dates right-flushed on the same
+% line); company/location follow on the second line, both italic.
+\newcommand{\job}[4]{%
+  \textbf{#1}\ifblank{#4}{}{ \hfill #4}\\
+  \textit{#2}\ifblank{#3}{}{ \hfill \textit{#3}}%
+}
+
+\newcommand{\rbullet}[1]{%
+  \iftoggle{bulletsopen}{}{\begin{itemize}\toggletrue{bulletsopen}}%
+  \item #1%
+}
+
+\newcommand{\skillline}[2]{%
+  \iftoggle{skilllinenotfirst}{\\}{\toggletrue{skilllinenotfirst}}%
+  \textbf{#1:} #2%
+}
+
+\newcommand{\edu}[4]{%
+  \textbf{#1}\ifblank{#3}{}{ \hfill #3}\\
+  #2\ifblank{#4}{}{ \hfill GPA: #4}%
+}
+
+\newcommand{\cert}[1]{\\ \textbf{Certification:} #1}
+
+\newcommand{\project}[4]{%
+  \textbf{#1}\ifblank{#2}{}{ -- #2}\ifblank{#3}{}{ \hfill \href{#3}{[#4]}}%
+}
+
+\newcommand{\entrygap}{\vspace{4pt}}
+
+% -------------------- Document --------------------
+
+\begin{document}
+
+\resumeheader{Ludwig Alvarado Becerra}{Systems Engineer \textbar{} Computational Modeling \& Simulation}{%
+\citem{email}{jobs@ludwigalvarado.me}{jobs@ludwigalvarado.me}
+\citem{phone}{+57 320 999 2989}{+57 320 999 2989}
+\citem{web}{https://ludwigalvarado.me}{www.ludwigalvarado.me}
+\citem{github}{https://github.com/theludway}{github/theludway}
+\citem{linkedin}{https://www.linkedin.com/in/theludway}{linkedin/theludway}}
+
+\sectionstart{PROFILE}
+Systems Engineering and Computational Modeling \& Simulation student with 2+ years of hands-on experience in software automation, CI/CD, GNU/Linux systems, containerization, and application reliability. Professional experience in software automation at ROSEN, complemented by technical infrastructure and automation work as a founding member of a geotechnology organization. Experienced with C\#, Python, Bash, GitHub Actions, Docker, Kubernetes, and Linux environments. Interested in Site Reliability Engineering, production automation, observability, and reliable software delivery.
+
+\sectionstart{EXPERIENCE}
+\job{Automation Engineer Intern}{ROSEN - RTRC Bogotá}{Bogotá, Colombia}{Jan. 2026 -- Aug. 2026}
+\rbullet{Automated software validation workflows for pipeline inspection applications, contributing to an estimated USD 1.5M in savings over four months.}
+\rbullet{Improved CI/CD build performance by 30\% and modernized legacy application modules in C\#.}
+\closebullets
+\entrygap
+
+\job{Founding Member -- Technical Infrastructure}{Asociación de Cartografía Colaborativa de Colombia (AC3)}{Bogotá, Colombia}{Nov. 2024 -- Present}
+\rbullet{Maintain GNU/Linux environments and automate system configuration with Bash, while troubleshooting networking and application environments.}
+\rbullet{Containerize and maintain geospatial workflows using Docker, providing reproducible infrastructure for drone-based data acquisition and processing.}
+\closebullets
+\entrygap
+
+
+\sectionstart{EDUCATION}
+\job{Systems Engineering -- Computational Modeling \& Simulation}{Universidad Jorge Tadeo Lozano}{Bogotá, Colombia}{Jan. 2022 -- Nov. 2026}
+\rbullet{Founder of GNUTADEO, a free software community focused on GNU/Linux, open-source technologies, and technical knowledge sharing.}
+\rbullet{Founder and coordinator of Segmentation Fault, a competitive programming group focused on algorithms and problem solving.}
+\closebullets
+\entrygap
+
+\sectionstart{RECOGNITIONS}
+\job{1st Place -- RiskTech Hackathon}{RiskTech}{Bogotá, Colombia}{Nov. 2025}
+\rbullet{Designed a reproducible software workflow for fraud detection in banking transactions using machine learning.}
+\closebullets
+\entrygap
+
+\job{2nd Place -- Hackathon Desafío Inteligente}{Ministry of Mines and Energy -- Universidad Tecnológica de Pereira}{Bogotá, Colombia}{Dec. 2025}
+\rbullet{Developed a digital-twin software solution for monitoring reservoir levels in Colombia, emphasizing reproducible and open-source software workflows.}
+\closebullets
+\entrygap
+
+\sectionstart{TECHNICAL SKILLS}
+\skillline{Systems \& Infrastructure}{GNU/Linux, Bash, Docker, Podman, Kubernetes, Networking Fundamentals.}
+\skillline{CI/CD \& Automation}{CI/CD, GitHub Actions, Git, Playwright, Python, Shell Scripting.}
+\skillline{Development}{C\#, Python, C++, Java, SQL, JavaScript, TypeScript, REST APIs.}
+\skillline{Engineering}{Software Testing, Application Reliability, Troubleshooting, Automation, Distributed Systems Fundamentals.}
+\skillline{Languages}{Spanish (Native), English (B2), Mandarin Chinese (HSK3).}
+
+\end{document}
+
+
